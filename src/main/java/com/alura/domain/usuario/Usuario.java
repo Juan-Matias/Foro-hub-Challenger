@@ -1,30 +1,63 @@
 package com.alura.domain.usuario;
 
 import jakarta.persistence.*;
-import lombok.*;
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-@Entity
+import java.util.Collection;
+import java.util.List;
+
 @Table(name = "usuarios")
-@Data // Genera getters, setters, toString, equals y hashCode
-@NoArgsConstructor // Genera constructor vacío
-@AllArgsConstructor // Genera constructor con todos los campos
-@Builder // Permite construir objetos con patrón builder
-public class Usuario {
+@Entity(name="Usuario")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of="id")
 
+public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String login;
+    private String contrasena;
 
-    @Column(nullable = false, unique = true)
-    private String nombreUsuario;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
 
-    @Column(nullable = false)
-    private String password;
+    @Override
+    public String getPassword() {
+        return this.contrasena;
+    }
 
-    @Column(nullable = false, unique = true)
-    private String email;
+    @Override
+    public String getUsername() {
+        return this.login;
+    }
 
-    @Column(name = "fecha_creacion")
-    private LocalDateTime fechaCreacion = LocalDateTime.now();
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

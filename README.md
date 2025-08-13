@@ -1,5 +1,7 @@
 # Foro Hub Challenger
 
+![Vista previa](docs/img/foro-hub.png)
+
 ## Descripción del proyecto
 
 Foro Hub es un desafío backend para construir una API REST que permita gestionar un foro donde los usuarios puedan crear, consultar, actualizar y eliminar tópicos. El objetivo es replicar las funcionalidades principales del backend de un foro usando Spring Boot, centrándonos en el manejo de tópicos, usuarios y sus interacciones.
@@ -73,6 +75,7 @@ varchar course
 }
 
 ```
+
 
 
 ## Funcionalidades futuras

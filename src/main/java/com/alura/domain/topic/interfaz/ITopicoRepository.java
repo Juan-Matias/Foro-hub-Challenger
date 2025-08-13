@@ -1,5 +1,4 @@
 package com.alura.domain.topic.interfaz;
-
 import com.alura.domain.topic.Topico;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,5 +10,6 @@ public interface ITopicoRepository extends JpaRepository<Topico, Long> {
 
     boolean existsByTitleIgnoreCase(String title);
     boolean existsByMessageIgnoreCase(String message);
-    Page<Topico> findByActiveTrue(Pageable paged);
+
+    Page<Topico> findAllByActivoTrue(Pageable paginacion);
 }

@@ -1,15 +1,18 @@
 package com.alura.controller;
 
-import com.alura.domain.topic.Topico;
+import com.alura.domain.ValidacionException;
+import com.alura.domain.topic.dto.DatosListarTopico;
+import com.alura.domain.topic.dto.DatosRegistroTopico;
 import com.alura.domain.topic.dto.DatosRespuestaTopico;
 import com.alura.domain.topic.interfaz.ITopicoRepository;
+import com.alura.domain.topic.service.TopicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -19,25 +22,38 @@ import java.net.URI;
 public class TopicoController {
 
     @Autowired
+    private TopicoService topicoService;
+    @Autowired
     private ITopicoRepository topicoRepository;
 
-    @PostMapping
-    public ResponseEntity<DatosRespuestaTopico> registrarTopic
-            (
-                    @RequestBody @Valid
-                    DatosRespuestaTopico datosRespuestaTopic,
-                    UriComponentsBuilder uriComponentsBuilder
-            ) {
-        Topico topico = topicoRepository.save(new Topico(datosRespuestaTopic));
-        DatosRespuestaTopico datosRespuestaTopico = new DatosRespuestaTopico(
-                topico.getId(),
-                topico.getTitle(),
-                topico.getMessage(),
-                topico.getEstatus(),
-                topico.getCourse()
-        );
+    /**
+     * REST API POST
+     * Registrar nuevo Topico
+     */
 
-        URI url = uriComponentsBuilder.path("/topico/{id}").buildAndExpand(topico.getId()).toUri();
-        return ResponseEntity.created(url).body(datosRespuestaTopico);
+    @PostMapping
+    public ResponseEntity<DatosRespuestaTopico> registrarTopico(
+            @RequestBody @Valid DatosRegistroTopico datosRegistroTopico,
+            UriComponentsBuilder uriBuilder) {
+
+        DatosRespuestaTopico topicoRegistrado = topicoService.registrarTopico(datosRegistroTopico);
+
+        URI url = uriBuilder.path("/topic/{id}")
+                .buildAndExpand(topicoRegistrado.id())
+                .toUri();
+
+        return ResponseEntity.created(url).body(topicoRegistrado); // 201 Created
     }
+
+    /**
+     * REST API GET
+     * Obtener todos los Topico
+     */
+
+    @GetMapping
+    public ResponseEntity<Page<DatosListarTopico>> listar(@PageableDefault(size = 10, sort = {"nombre"}) Pageable paginacion) {
+        var page = topicoRepository.findAllByActivoTrue(paginacion).map(DatosListarTopico::new);
+        return ResponseEntity.ok(page);
+    }
+
 }

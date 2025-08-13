@@ -1,6 +1,6 @@
 package com.alura.domain.topic;
 
-import com.alura.domain.topic.dto.DatosRespuestaTopico;
+import com.alura.domain.topic.dto.DatosRegistroTopico;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -39,7 +39,7 @@ public class Topico {
     private boolean active = true;
 
     // Constructor que recibe el DTO
-    public Topico(DatosRespuestaTopico dto) {
+    public Topico(DatosRegistroTopico dto) {
         this.title = dto.title();
         this.message = dto.message();
         this.estatus = dto.estatus();

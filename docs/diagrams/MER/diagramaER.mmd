@@ -1,0 +1,16 @@
+erDiagram
+USUARIOS ||--o{ TOPICOS : author_id
+USUARIOS {
+bigint id pk
+varchar nombre
+varchar email
+}
+TOPICOS {
+bigint id pk
+varchar title
+text message
+datetime created_at
+enum status
+bigint author_id fk
+varchar course
+}

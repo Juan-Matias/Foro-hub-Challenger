@@ -1,0 +1,52 @@
+%% Diagrama de clases detallado para ForoHubChallenger
+classDiagram
+%% Paquete: domain.topic
+    class Topico {
+        +Long id
+        +String title
+        +String message
+        +LocalDateTime fechaCreacion
+        +String estatus
+        +String autor
+        +String curso
+        +boolean active
+        +Topico(DatosRespuestaTopico dto)
+    }
+
+    class DatosRespuestaTopico {
+        +Long id
+        +String titulo
+        +String mensaje
+        +String estatus
+    }
+
+    class ITopicoRepository {
+        +existsByTitleIgnoreCase(title)
+        +existsByMessageIgnoreCase(message)
+        +findByActiveTrue(Pageable paged)
+    }
+
+%% Paquete: domain.usuario
+    class Usuario {
+        +Long id
+        +String nombre
+        +String email
+        +String password
+    }
+
+%% Paquete: controller
+    class TopicoController {
+        -ITopicoRepository topicoRepository
+        +registrarTopic(DatosRespuestaTopico datos, UriComponentsBuilder uriBuilder)
+    }
+
+%% Paquete: infra
+    class SecurityConfigurations {
+        <<configuration>>
+    }
+
+%% Relaciones
+    TopicoController --> ITopicoRepository : usa
+    ITopicoRepository --> Topico : maneja
+    Topico --> DatosRespuestaTopico : mapea desde
+    Topico --> Usuario : autor_id

@@ -1,6 +1,6 @@
 # Foro Hub Challenger
 
-![Vista previa](docs/img/foro-hub.png)
+![Insignia foro hub](docs/img/foro-hub.png)
 
 ## Descripción del proyecto
 
@@ -56,27 +56,11 @@ Este proyecto ayuda a profundizar en el diseño de APIs REST, persistencia de da
 
 ## Diagrama de Base de datos
 
-```mermaid
-erDiagram
-    USUARIOS ||--o{ TOPICOS : author_id
-    USUARIOS {
-bigint id pk
-        varchar nombre
-varchar email
-}
-TOPICOS {
-bigint id pk
-varchar title
-text message
-datetime created_at
-enum status
-bigint author_id fk
-varchar course
-}
+![Insignia foro hub](docs/diagrams/MER/DB.png)
 
-```
+## Diagrama de Base de datos
 
-
+![Insignia foro hub](docs/diagrams/UML/diagramaDeClases.png)
 
 ## Funcionalidades futuras
 

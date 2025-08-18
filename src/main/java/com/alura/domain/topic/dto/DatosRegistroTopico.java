@@ -9,7 +9,7 @@ public record DatosRegistroTopico(
         @NotBlank(message = "Mensaje es obligatorio")
         String message,
         @NotBlank(message = "Estatus es obligatorio")
-        String estatus,
+        String status,
         @NotNull(message = "Curso es obligatorio")
         String course
 ) {

@@ -5,7 +5,7 @@ public record DatosRespuestaTopico(
         Long id,
         String title,
         String message,
-        String estatus,
+        String status,
         String course
 ) {
     public DatosRespuestaTopico(Topico topico) {
@@ -13,7 +13,7 @@ public record DatosRespuestaTopico(
                 topico.getId(),
                 topico.getTitle(),
                 topico.getMessage(),
-                topico.getEstatus(),
+                topico.getStatus(),
                 topico.getCourse());
     }
 }

@@ -7,7 +7,7 @@ public record DatosListarTopico(
         String title,
         String message,
         LocalDateTime fechaCreacion,
-        String estatus,
+        String status,
         Long autor,
         String course
 ) {
@@ -17,7 +17,7 @@ public record DatosListarTopico(
                 topico.getTitle(),
                 topico.getMessage(),
                 topico.getFechaCreacion(),
-                topico.getEstatus(),
+                topico.getStatus(),
                 topico.getAutor(),
                 topico.getCourse()
         );

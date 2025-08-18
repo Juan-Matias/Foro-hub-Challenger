@@ -8,8 +8,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ITopicoRepository extends JpaRepository<Topico, Long> {
 
+    // Validaciones de duplicados
     boolean existsByTitleIgnoreCase(String title);
     boolean existsByMessageIgnoreCase(String message);
 
-    Page<Topico> findAllByActivoTrue(Pageable paginacion);
+    // Listado paginado de tópicos activos
+    Page<Topico> findAllByActiveTrue(Pageable paginacion);
+
+
 }

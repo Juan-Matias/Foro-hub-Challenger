@@ -60,7 +60,7 @@ Este proyecto ayuda a profundizar en el diseño de APIs REST, persistencia de da
 - **Servicios:** Implementación de la lógica de negocio.
 - **Controladores:** Endpoints REST para la interacción con clientes.
 
-```mermaid
+```
 src/
 ├─ main/
 │  ├─ java/

@@ -12,7 +12,10 @@
 ![DevTools](https://img.shields.io/badge/DevTools-Enabled-lightgreen)
 ![Insomnia](https://img.shields.io/badge/Insomnia-REST-pink)
 
-![Insignia foro hub](docs/img/foro-hub.png)
+<p align="center">
+  <img src="docs/img/foro-hub.png" alt="Insignia foro hub" />
+</p>
+
 
 ## 📄 Descripción del proyecto
 

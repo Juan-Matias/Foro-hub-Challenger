@@ -11,4 +11,15 @@ public record DatosListarTopico(
         Long autor,
         String course
 ) {
+    public DatosListarTopico(Topico topico) {
+        this(
+                topico.getId(),
+                topico.getTitle(),
+                topico.getMessage(),
+                topico.getFechaCreacion(),
+                topico.getStatus().name(), // si status es un enum
+                topico.getAutor().getId(), // si autor es entidad Usuario
+                topico.getCourse()
+        );
+    }
 }

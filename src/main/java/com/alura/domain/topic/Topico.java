@@ -32,7 +32,7 @@ public class Topico {
 
     @ManyToOne
     @JoinColumn(name = "author_id")
-    private Usuario autor; // Usuario que creó el tópico
+    private Usuario autor;
 
     private String course;
     private boolean active = true;
@@ -47,10 +47,20 @@ public class Topico {
         this.active = true;
     }
 
+    // Actualizar campos desde DTO
     public void actualizarTopico(DatosActualizarTopico datos){
         if (datos.title() != null) this.title = datos.title();
         if (datos.message() != null) this.message = datos.message();
         if (datos.status() != null) this.status = datos.status();
         if (datos.curso() != null) this.course = datos.curso();
     }
+
+    public boolean getActive() {
+        return this.active;
+    }
+
+    public void desactivarTopico() {
+        this.active= false;
+    }
+
 }

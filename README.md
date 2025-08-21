@@ -19,15 +19,15 @@
 
 ## 📄 Descripción del proyecto
 
-Foro Hub es un desafío backend para construir una API REST que permita gestionar un foro donde los usuarios puedan crear, consultar, actualizar y eliminar tópicos. El objetivo es replicar las funcionalidades principales del backend de un foro usando Spring Boot, centrándonos en el manejo de tópicos, usuarios y sus interacciones.
-
+Foro Hub es un desafío backend para construir una API REST que permita gestionar un foro donde los usuarios puedan crear, consultar, actualizar y eliminar tópicos.
+El objetivo es replicar las funcionalidades principales del backend de un foro usando Spring Boot, centrándonos en el manejo de tópicos, usuarios y sus interacciones.
 La API ofrecerá los siguientes endpoints:
 
 - [x] Crear un nuevo tópico
-- [ ] Mostrar todos los tópicos
-- [ ] Mostrar un tópico específico
-- [ ] Actualizar un tópico
-- [ ] Eliminar un tópico
+- [x] Mostrar todos los tópicos
+- [x] Mostrar un tópico específico
+- [x] Actualizar un tópico
+- [x] Eliminar un tópico
 
 Este proyecto ayuda a profundizar en el diseño de APIs REST, persistencia de datos, validaciones y seguridad.
 
@@ -174,6 +174,17 @@ Topico --> Usuario : autor_id
 - Validaciones y manejo de errores.
 - Paginación y filtrado de tópicos.
 
+## 🔹 Nomenclatura de commits
+
+```
+feat: → Nueva funcionalidad 
+fix: → Corrección de errores
+refactor: → Cambios internos sin afectar funcionalidad
+docs: → Cambios en documentación
+style: → Formato, espacios, comas, sin cambios de código
+test: → Agregar o actualizar pruebas
+chore: → Tareas de mantenimiento (build, dependencias, configs)
+```
 
 ## 📬 Contacto
 

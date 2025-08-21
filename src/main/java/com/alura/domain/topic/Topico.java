@@ -1,9 +1,12 @@
 package com.alura.domain.topic;
 
-import com.alura.domain.topic.dto.DatosActualizarTopico;
 import com.alura.domain.topic.dto.DatosRegistroTopico;
+import com.alura.domain.topic.dto.DatosActualizarTopico;
+import com.alura.domain.usuario.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,49 +21,36 @@ public class Topico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String title;
-
-    @Column(nullable = false)
     private String message;
-
-    @Column(name = "date", nullable = false)
     private LocalDateTime fechaCreacion = LocalDateTime.now();
 
     @Column(name = "status")
-    private String status;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
-    @Column(name = "author_id")
-    private Long autor;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Usuario autor; // Usuario que creó el tópico
 
-    @Column(nullable = false)
     private String course;
-
-    @Column(nullable = false)
     private boolean active = true;
 
-    // Constructor que recibe el DTO
-    public Topico(DatosRegistroTopico datos) {
+    // Constructor con DTO y autor
+    public Topico(DatosRegistroTopico datos, Usuario autor) {
         this.title = datos.title();
         this.message = datos.message();
         this.status = datos.status();
         this.course = datos.course();
+        this.autor = autor;
         this.active = true;
     }
 
     public void actualizarTopico(DatosActualizarTopico datos){
-        if (datos.title() !=null){
-            this.title= datos.title();
-        }
-        if (datos.message() != null){
-            this.message=datos.message();
-        }
-        if (datos.status() != null){
-            this.status = String.valueOf(datos.status());
-        }
-        if (datos.curso() != null){
-            this.course=datos.curso();
-        }
+        if (datos.title() != null) this.title = datos.title();
+        if (datos.message() != null) this.message = datos.message();
+        if (datos.status() != null) this.status = datos.status();
+        if (datos.curso() != null) this.course = datos.curso();
     }
-
 }

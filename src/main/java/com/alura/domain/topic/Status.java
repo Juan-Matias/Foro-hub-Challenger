@@ -1,6 +1,7 @@
 package com.alura.domain.topic;
 
 public enum Status {
-    ACTIVO,
-    INACTIVO
+    ACTIVE,
+    INACTIVE,
+    RESOLVED
 }

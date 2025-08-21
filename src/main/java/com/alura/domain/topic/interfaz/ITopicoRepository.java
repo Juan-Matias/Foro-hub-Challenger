@@ -15,5 +15,4 @@ public interface ITopicoRepository extends JpaRepository<Topico, Long> {
     // Listado paginado de tópicos activos
     Page<Topico> findAllByActiveTrue(Pageable paginacion);
 
-
 }

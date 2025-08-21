@@ -51,14 +51,14 @@ public class TopicoController {
      * Obtener todos los Topico
      */
 
-    @GetMapping
-    public ResponseEntity<Page<DatosListarTopico>> listarTopico(
-            @PageableDefault(size = 10, sort = {"title"}) Pageable paginacion) {
-
-        var page = topicoRepository.findAllByActiveTrue(paginacion)
-                .map(DatosListarTopico::new);
-        return ResponseEntity.ok(page);
-    }
+//    @GetMapping
+//    public ResponseEntity<Page<DatosListarTopico>> listarTopico(
+//            @PageableDefault(size = 10, sort = {"title"}) Pageable paginacion) {
+//
+//        var page = topicoRepository.findAllByActiveTrue(paginacion)
+//                .map(DatosListarTopico::new);
+//        return ResponseEntity.ok(page);
+//    }
 
     /**
      * REST API PUT

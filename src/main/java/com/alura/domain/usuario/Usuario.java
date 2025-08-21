@@ -18,13 +18,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of="id")
-
 public class Usuario implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String login;
-    private String contrasena;
+
+    @Column(name = "login")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -33,12 +37,12 @@ public class Usuario implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.contrasena;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return this.login;
+        return this.username;
     }
 
     @Override
@@ -61,3 +65,4 @@ public class Usuario implements UserDetails {
         return true;
     }
 }
+

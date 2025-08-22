@@ -1,6 +1,5 @@
 package com.alura.controller;
 
-import com.alura.domain.topic.Topico;
 import com.alura.domain.topic.dto.*;
 import com.alura.domain.topic.service.TopicoService;
 import jakarta.validation.Valid;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/topic")
@@ -18,9 +18,7 @@ public class TopicoController {
     @Autowired
     private TopicoService topicoService;
 
-    /**
-     * REST API POST → Crear un nuevo Tópico
-     */
+    // Crear tópico (POST)
     @PostMapping
     public ResponseEntity<DatosRespuestaTopico> registrarTopico(
             @RequestBody @Valid DatosRegistroTopico datosRegistroTopico,
@@ -35,41 +33,31 @@ public class TopicoController {
         return ResponseEntity.created(url).body(topicoRegistrado);
     }
 
-    /**
-     * REST API GET → Obtener detalle de un Tópico por ID
-     */
-    @GetMapping("/topicos/{id}")
-    public ResponseEntity<DatosListarTopico> detalleTopico(@PathVariable Long id) {
-        DatosListarTopico dto = topicoService.detalleTopico(id);
-
-        // Solo devolver si el tópico está activo
-        if (dto == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(dto);
+    // Listar todos los tópicos (GET /topic)
+    @GetMapping
+    public ResponseEntity<List<DatosListarTopico>> listarTopicos() {
+        return ResponseEntity.ok(topicoService.listarTopicos());
     }
 
-    /**
-     * REST API PUT → Actualizar un Tópico por ID
-     */
+    // Obtener detalle por ID (GET /topic/{id})
+    @GetMapping("/{id}")
+    public ResponseEntity<DatosListarTopico> detalleTopico(@PathVariable Long id) {
+        return ResponseEntity.ok(topicoService.detalleTopico(id));
+    }
+
+    // Actualizar tópico (PUT /topic/{id})
     @PutMapping("/{id}")
-    public ResponseEntity<DatosRespuestaTopico> actualizarTopico(
+    public ResponseEntity<DatosActualizarTopico> actualizarTopico(
             @PathVariable Long id,
             @RequestBody @Valid DatosActualizarTopico datosActualizarTopico) {
 
-        DatosRespuestaTopico dto = topicoService.actualizarTopico(id, datosActualizarTopico);
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(topicoService.actualizarTopico(id, datosActualizarTopico));
     }
 
-    /**
-     * REST API DELETE → Eliminar un Tópico por ID
-     */
-
+    // Eliminar tópico (DELETE /topic/{id})
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarTopico(@PathVariable Long id) {
         topicoService.eliminarTopico(id);
-        return ResponseEntity.noContent().build(); // 204 No Content
+        return ResponseEntity.noContent().build();
     }
-
 }
